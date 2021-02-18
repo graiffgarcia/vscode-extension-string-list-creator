@@ -32,7 +32,7 @@ function activate(context) {
 		const word = document.getText(selection);
 
 		var word_list = word.split('\n');
-		word_list = word_list.map(x => x.trim());
+		word_list = word_list.filter(x => x.length > 0 && x.trim() != '').map(x => x.trim());
 
 		const new_word_list = word_list.map(x => "'" + x + "',");
 		var quoted = new_word_list.join('\n');
