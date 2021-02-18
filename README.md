@@ -14,7 +14,7 @@ Rock Dust Light Star
 Automaton (bleh)
 ```
 
-If you select the text and running the command, the result will be:
+If you select the text and run the command, the result will be:
 
 ```
 ['Emergency on Planet Earth',
