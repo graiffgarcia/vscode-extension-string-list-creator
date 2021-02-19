@@ -15,16 +15,11 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:string-list-creator.helloWorld",
     "onCommand:string-list-creator.createStringList"
   ],
   "main": "./extension.js",
   "contributes": {
     "commands": [
-      {
-        "command": "string-list-creator.helloWorld",
-        "title": "Hello World"
-      },
       {
         "command": "string-list-creator.createStringList",
         "title": "Create list of strings",
