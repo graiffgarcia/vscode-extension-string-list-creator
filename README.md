@@ -29,6 +29,6 @@ If you select the text and run the command, the result will be:
 
 TODO:
 
-1. if any of the strings contain single quotes, turn them into double quotes and display a warning to the user
-2. if no text is selected, do nothing and display a warning to the user (I feel like anything else would be stupid — failing silently would be frustrating, assuming that the user wants to quote the *entire* document and transforming everything would be even more annoying)
-3. allow the user to define a separator other than a newline. Maybe the package could have different functions? Instead of "Create list of strings", we could have a series of commands that say "Create list of strings (newline separated)", "Create list of strings (semicolon separated)", etc.
+- [x] if any of the strings contain single quotes, turn them into double quotes and display a warning to the user
+- [x] if no text is selected, do nothing and display a warning to the user (I feel like anything else would be stupid — failing silently would be frustrating, assuming that the user wants to quote the *entire* document and transforming everything would be even more annoying)
+- [x] allow the user to define a separator other than a newline. Maybe the package could have different functions? Instead of "Create list of strings", we could have a series of commands that say "Create list of strings (newline separated)", "Create list of strings (semicolon separated)", etc.

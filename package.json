@@ -15,14 +15,20 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:string-list-creator.createStringList"
+    "onCommand:string-list-creator.create_string_list_newline",
+    "onCommand:string-list-creator.create_string_list_semicolon"
   ],
   "main": "./extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "string-list-creator.createStringList",
-        "title": "Create list of strings",
+        "command": "string-list-creator.create_string_list_newline",
+        "title": "Create list of strings (newline separated)",
+        "category": "String List Creator"
+      },
+      {
+        "command": "string-list-creator.create_string_list_semicolon",
+        "title": "Create list of strings (semicolon separated)",
         "category": "String List Creator"
       }
     ]

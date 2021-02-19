@@ -2,6 +2,14 @@
 // Import the module and reference it with the alias vscode in your code below
 const vscode = require('vscode');
 
+var replace_single_quotes = function(string){
+	if (/'/.test(string)) {
+		vscode.window.showWarningMessage("There are single quotes (') in your string. They'll be turned into double quotes so the command can run without problems.");
+		var newstring = string.replace(/\'/g, '"');
+		return newstring;
+	}
+}
+
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -22,16 +30,23 @@ function activate(context) {
 	// });
 	// context.subscriptions.push(disposable);
 
-	disposable = vscode.commands.registerCommand('string-list-creator.createStringList', function () {
+	let disposable = vscode.commands.registerCommand('string-list-creator.create_string_list_newline', function () {
 
-		// let pkglog = vscode.window.createOutputChannel("String List Creator");
+		let pkglog = vscode.window.createOutputChannel("String List Creator");
 
 		const textEditor = vscode.window.activeTextEditor;
 		const document = textEditor.document;
 		const selection = textEditor.selection;
-		const word = document.getText(selection);
+		let word = document.getText(selection);
+
+		if(word.trim().length == 0){
+			vscode.window.showErrorMessage("Please select some text and re-run the command.");
+			return;
+		}
+		word = replace_single_quotes(word);
 
 		var word_list = word.split('\n');
+		
 		word_list = word_list.filter(x => x.length > 0 && x.trim() != '').map(x => x.trim());
 
 		const new_word_list = word_list.map(x => "'" + x + "',");
@@ -39,6 +54,37 @@ function activate(context) {
 		quoted = '[' + quoted.slice(0, -1) + ']';
 		
 		textEditor.edit(function(editBuilder) {
+			editBuilder.replace(selection, quoted);
+		});
+	});
+	context.subscriptions.push(disposable);
+
+	////////////////////////////////////////////
+	////////////////////////////////////////////
+	disposable = vscode.commands.registerCommand('string-list-creator.create_string_list_semicolon', function () {
+
+		let pkglog = vscode.window.createOutputChannel("String List Creator");
+
+		const textEditor = vscode.window.activeTextEditor;
+		const document = textEditor.document;
+		const selection = textEditor.selection;
+		let word = document.getText(selection);
+
+		if (word.trim().length == 0) {
+			vscode.window.showErrorMessage("Please select some text and re-run the command.");
+			return;
+		}
+		word = replace_single_quotes(word);
+
+		var word_list = word.split(/\s*?;\s*?/);
+
+		word_list = word_list.filter(x => x.length > 0 && x.trim() != '').map(x => x.trim());
+
+		const new_word_list = word_list.map(x => "'" + x + "',");
+		var quoted = new_word_list.join('\n');
+		quoted = '[' + quoted.slice(0, -1) + ']';
+
+		textEditor.edit(function (editBuilder) {
 			editBuilder.replace(selection, quoted);
 		});
 	});
