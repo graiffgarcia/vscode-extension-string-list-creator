@@ -8,6 +8,9 @@ var replace_single_quotes = function(string){
 		var newstring = string.replace(/\'/g, '"');
 		return newstring;
 	}
+	else {
+		return string;
+	}
 }
 
 
